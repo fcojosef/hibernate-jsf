@@ -1,8 +1,8 @@
 # Simple CRUD using Hibernate, JSF, MySQL, Bootstrap and PrimeFaces.
 
-# SORRY FOR BAD ENGLISH :((( - If there any error send e-mail for me : "almeida-matheus@hotmail.com.br"
+ SORRY FOR BAD ENGLISH :((( - If there any error send e-mail for me : "almeida-matheus@hotmail.com.br"
 
-#READ THE JAVADOC :D 
+ READ THE JAVADOC :D 
 
    Change the properties in the file named hibernate.cfg.xml in resources folder, according to your Database.
 
