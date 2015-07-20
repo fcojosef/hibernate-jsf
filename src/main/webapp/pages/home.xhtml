@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough">
+      
+<h:head>
+	<link rel="stylesheet" href="#{facesContext.externalContext.request.contextPath}/assets/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="#{facesContext.externalContext.request.contextPath}/assets/css/style.css"/>
+	<link rel="stylesheet" href="#{facesContext.externalContext.request.contextPath}/assets/css/bootstrap-theme.min.css"/>
+	<script src="#{facesContext.externalContext.request.contextPath}/assets/js/jquery-2.1.4.min.js"/>
+	<script src="#{facesContext.externalContext.request.contextPath}/assets/js/bootstrap.min.js"/>
+</h:head> 
+
+<h:body> 
+	<div class="container align-top">
+ 		<div class="row">			
+			<div class="col-md-8 col-md-offset-2 form-register">
+ 				<h:form>
+ 					<h:commandLink styleClass="btn btn-success"  action="register.jsf" value="New Employee" />
+ 				</h:form>
+ 			</div>
+ 			
+  			<div class="col-md-8 col-md-offset-2">
+   				<h:dataTable  styleClass="table table-striped table-bordered" value="#{employeeManagedBean.listEmployees}" var="item">
+            			    		  	
+   			  	<h:column>
+     		  		<f:facet name="header">Name Employee</f:facet>
+      		    	<h:outputText value="#{item.nameEmployee}" />
+    		  	</h:column>
+    
+    		  	<h:column>
+     				<f:facet name="header">Surname Employee</f:facet>
+      				<h:outputText value="#{item.surnameEmployee}" />
+   			 	 </h:column>
+    
+    		  	<h:column>
+       		 		<f:facet name="header">Age Employee</f:facet>
+      	 	 		<h:outputText value="#{item.ageEmployee}" />
+    	 	  	</h:column>
+    
+    	 	  	<h:column>
+      	 			<f:facet name="header">Sex Employee</f:facet>
+      	 	 		<h:outputText value="#{item.sexEmployee != 0 ? 'Male' : 'Female'}" />
+      	 	 	</h:column>
+    
+    		  	<h:column>
+      				<f:facet name="header">Functions</f:facet>
+      				<h:form>
+	   				<h:commandLink action="#{employeeManagedBean.deleteEmployee(item.idEmployee)}" styleClass="btn btn-danger">  <span class="glyphicon glyphicon-trash"/> </h:commandLink>
+	   				<h:commandLink action="#{employeeManagedBean.loadEmployeeForUpdate(item.idEmployee)}" styleClass="btn btn-primary">  <span class="glyphicon glyphicon-pencil"/></h:commandLink>
+	  				</h:form>
+    		  	</h:column>   
+     
+   				</h:dataTable>      
+  			</div>
+ 		</div>
+	</div> 
+	
+	<h:form id="formUpdate">   
+	<div id="myModal" class="modal fade">
+    	<div class="modal-dialog">
+        	<div class="modal-content modal-align">
+            	
+            	<div class="modal-header">
+                	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                	<h4 class="modal-title">Edit Employee</h4>
+            	</div>
+            	 
+            	<div class="modal-body">
+            	            	                
+     		 		<div class="form-group form-input">
+       		 			<h:outputLabel value="Name" for="name" />
+       		 			<h:inputText styleClass="form-control" id="name" value="#{employeeManagedBean.nameEmployee}"  />
+     		 		</div>
+					
+      		 		<div class="form-group form-input">
+       		 			<h:outputLabel value="Surname" for="surname" />
+       		  			<h:inputText styleClass="form-control" id="surname" value="#{employeeManagedBean.surnameEmployee}" />
+    				</div>
+
+    		 		<div class="form-group form-input">
+        				<h:outputLabel value="Age" for="age" />
+        				<h:inputText styleClass="form-control" id="age" value="#{employeeManagedBean.ageEmployee}" />
+      		 		</div>
+
+	  				<div class="form-group form-input">
+       		 			<h:outputLabel value="Sex" for="sex" />           				
+           				<h:selectOneMenu value="#{employeeManagedBean.sexEmployee}" styleClass="form-control" id="sex">
+          					<f:selectItems value="#{employeeManagedBean.listSex}"/>        				
+          				</h:selectOneMenu>
+      				</div>
+      		    
+            	</div>            	
+            	
+            	<div class="modal-footer">	
+                	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>                	
+                	<h:commandButton action="#{employeeManagedBean.updateEmployee(employeeManagedBean.idEmployee)}" styleClass="btn btn-success" value="Save changes"/>
+                </div>
+                
+        	</div>
+    	</div>
+	</div>
+  	</h:form>   
+  	
+  	<script>
+ 		function showModal(){
+   			$("#myModal").modal('show')   
+ 		}
+	</script>
+	
+</h:body>
+ 
+
+
+</html>
